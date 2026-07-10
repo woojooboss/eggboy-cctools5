@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 문제 95% 해결하는 저장소 5개 — 링크·설치 정리본</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --blue:#5573FF;
+  --ink:#111111;
+  --gray:#8A8A8A;
+  --bg:#FFFFFF;
+  --soft:#F4F6FF;
+  --notetx:#41496B;
+  --gold:#CAAA44;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.6;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px 80px;}
+
+/* ── 상단 DB 수집 배너 (공통 규칙) ── */
+.banner-wrap{max-width:900px;margin:0 auto;padding:28px 24px 0;}
+.cta-banner{
+  display:flex;align-items:center;gap:20px;text-decoration:none;
+  background:linear-gradient(135deg,#2a2a2a 0%,#111 100%);
+  border:1px solid rgba(202,170,68,.28);border-radius:18px;
+  padding:22px 28px;box-shadow:0 10px 30px rgba(0,0,0,.14);
+  transition:transform .18s,box-shadow .18s,border-color .18s;
+}
+.cta-banner:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(0,0,0,.22);border-color:rgba(202,170,68,.6);}
+.cta-banner .badge{width:52px;height:52px;flex-shrink:0;border-radius:50%;background:var(--gold);color:#1A1A1A;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:24px;box-shadow:0 4px 14px rgba(202,170,68,.4);}
+.cta-banner .txt{display:flex;flex-direction:column;gap:4px;min-width:0;}
+.cta-banner .txt .eb{font-weight:700;font-size:13px;letter-spacing:1px;color:var(--gold);}
+.cta-banner .txt .tt{font-weight:900;font-size:21px;color:#fff;line-height:1.3;letter-spacing:-.3px;}
+.cta-banner .arrow{margin-left:auto;flex-shrink:0;color:var(--gold);font-size:26px;transition:transform .18s;line-height:1;}
+.cta-banner:hover .arrow{transform:translateX(6px);}
+@media(max-width:620px){
+  .banner-wrap{padding:20px 18px 0;}
+  .cta-banner{gap:14px;padding:18px 20px;border-radius:14px;}
+  .cta-banner .badge{width:44px;height:44px;font-size:20px;}
+  .cta-banner .txt .tt{font-size:17px;}
+  .cta-banner .txt .eb{font-size:12px;}
+  .cta-banner .arrow{font-size:22px;}
+}
+
+/* ── 헤더 ── */
+.hero{padding:64px 0 20px;text-align:left;}
+.hero .eyebrow{
+  display:inline-block;border:2px solid var(--ink);border-radius:999px;
+  padding:6px 18px;font-size:14px;font-weight:600;margin-bottom:22px;
+}
+.hero h1{font-size:40px;font-weight:900;line-height:1.25;letter-spacing:-0.02em;}
+.hero h1 .hl{color:var(--blue);}
+.hero p{margin-top:18px;font-size:17px;color:#444;}
+.hero .from{margin-top:14px;font-size:14px;color:var(--gray);}
+@media(max-width:620px){.hero h1{font-size:30px;}}
+
+/* ── 시작 전 준비 박스 ── */
+.prep{
+  border:2px solid var(--blue);border-radius:20px;
+  padding:32px 30px;margin-top:32px;background:var(--soft);
+}
+.prep h2{font-size:22px;font-weight:900;}
+.prep h2 .hl{color:var(--blue);}
+.prep .p-item{margin-top:20px;}
+.prep .p-item b{display:block;font-size:16px;margin-bottom:6px;}
+.prep .p-item p{font-size:15px;color:#333;}
+.prep .warn{
+  margin-top:22px;background:#fff;border-radius:12px;
+  padding:16px 18px;font-size:15px;color:var(--notetx);font-weight:600;
+}
+
+/* ── 저장소 카드 ── */
+.repo{
+  border:2px solid #E8EAF6;border-radius:20px;
+  padding:32px 30px;margin-top:28px;background:#fff;
+}
+.repo .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--blue);color:#fff;font-weight:900;font-size:20px;
+  margin-bottom:14px;
+}
+.repo h2{font-size:26px;font-weight:900;letter-spacing:-0.01em;}
+.repo h2 small{display:block;font-size:15px;font-weight:600;color:var(--blue);margin-top:6px;}
+.repo .desc{margin-top:14px;font-size:16px;color:#333;}
+.repo .meta{margin-top:12px;font-size:14px;color:var(--gray);}
+.repo a.link{
+  display:inline-block;margin-top:14px;font-size:15px;font-weight:700;
+  color:var(--blue);text-decoration:none;word-break:break-all;
+}
+.repo a.link:hover{text-decoration:underline;}
+.repo h3{margin-top:26px;font-size:16px;font-weight:800;letter-spacing:.02em;color:var(--ink);}
+.step{margin-top:16px;}
+.step .s-label{
+  display:inline-block;font-size:13px;font-weight:800;
+  padding:4px 12px;border-radius:999px;margin-bottom:8px;
+}
+.step .s-label.term{background:#16181D;color:#fff;}
+.step .s-label.cc{background:var(--blue);color:#fff;}
+.step .s-text{font-size:15px;color:#333;margin-bottom:8px;}
+pre{
+  background:#16181D;color:#EAECEF;
+  border-radius:12px;padding:16px 20px;overflow-x:auto;
+  font-family:Consolas,'Courier New',monospace;font-size:14px;line-height:1.7;
+}
+pre .c{color:#7B8494;}
+.note{
+  margin-top:16px;background:var(--soft);border-radius:12px;
+  padding:14px 18px;font-size:14px;color:var(--notetx);
+}
+.note b{color:var(--blue);}
+
+/* ── 푸터 ── */
+.foot{margin-top:56px;text-align:center;color:var(--gray);font-size:14px;line-height:1.8;}
+.foot b{color:var(--ink);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">에그보이 정리본 · 2026.07 기준</div>
+    <h1>Claude Code 문제 95%<br>해결하는 <span class="hl">저장소 5개</span></h1>
+    <p>
+      링크와 설치 방법을<br>
+      한 번에 정리했습니다.<br><br>
+      전부 오픈소스, 전부 무료입니다.<br>
+      처음 하는 분도 따라 할 수 있게<br>
+      단계별로 적어뒀어요.
+    </p>
+    <div class="from">@eggboy.ai — 댓글 이벤트 DM 자료</div>
+  </div>
+
+  <!-- 시작 전 준비 -->
+  <div class="prep">
+    <h2>⚙️ 시작 전 <span class="hl">3분 준비</span> (한 번만 하면 됩니다)</h2>
+
+    <div class="p-item">
+      <b>① Claude Code가 설치되어 있어야 합니다</b>
+      <p>
+        아직 없다면 터미널에 아래 한 줄 —<br>
+        (Node.js가 먼저 필요합니다. nodejs.org에서 LTS 버전 설치)
+      </p>
+      <pre>npm install -g @anthropic-ai/claude-code</pre>
+    </div>
+
+    <div class="p-item">
+      <b>② 터미널 여는 법</b>
+      <p>
+        윈도우: 시작 버튼 → "PowerShell" 검색 → 실행<br>
+        맥: Spotlight(⌘+스페이스) → "터미널" 검색 → 실행
+      </p>
+    </div>
+
+    <div class="p-item">
+      <b>③ uv 설치 (2번·3번 도구에서 씁니다)</b>
+      <p>윈도우 PowerShell:</p>
+      <pre>powershell -c "irm https://astral.sh/uv/install.ps1 | iex"</pre>
+      <p>맥 터미널:</p>
+      <pre>curl -LsSf https://astral.sh/uv/install.sh | sh</pre>
+    </div>
+
+    <div class="warn">
+      🧭 헷갈림 방지 —
+      <span style="background:#16181D;color:#fff;padding:2px 10px;border-radius:999px;font-size:13px;">터미널</span>
+      표시는 PowerShell/터미널에 입력,
+      <span style="background:var(--blue);color:#fff;padding:2px 10px;border-radius:999px;font-size:13px;">Claude Code</span>
+      표시는 claude 실행 후 채팅 입력창에 입력하는 명령입니다.
+    </div>
+  </div>
+
+  <!-- 1 -->
+  <div class="repo">
+    <div class="num">1</div>
+    <h2>claude-video<small>Claude가 영상을 직접 보고 답합니다</small></h2>
+    <div class="desc">
+      /watch 명령 하나로 영상 다운로드,<br>
+      프레임 추출, 음성 전사까지 자동 처리.<br>
+      제목·자막 추측이 아니라<br>
+      실제 화면 내용으로 답합니다.
+    </div>
+    <div class="meta">⭐ 6.9k · MIT 라이선스 · yt-dlp + ffmpeg 기반</div>
+    <a class="link" href="https://github.com/bradautomates/claude-video" target="_blank" rel="noopener noreferrer">github.com/bradautomates/claude-video</a>
+
+    <h3>📦 설치 (2단계)</h3>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">1. Claude Code를 실행합니다</div>
+      <pre>claude</pre>
+    </div>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <div class="s-text">2. 채팅 입력창에 아래 두 줄을 한 줄씩 입력합니다</div>
+      <pre>/plugin marketplace add bradautomates/claude-video
+/plugin install watch@claude-video</pre>
+    </div>
+
+    <h3>▶️ 사용법</h3>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <div class="s-text">영상 주소를 넣고 궁금한 걸 물어보면 끝</div>
+      <pre>/watch https://youtube.com/watch?v=영상주소
+이 영상 핵심 내용 요약해줘</pre>
+    </div>
+    <div class="note">💡 처음 실행할 때 yt-dlp나 ffmpeg가 없다고 나오면, Claude가 알려주는 설치 안내만 그대로 따라 하면 됩니다.</div>
+  </div>
+
+  <!-- 2 -->
+  <div class="repo">
+    <div class="num">2</div>
+    <h2>notebooklm-py<small>리서치를 Google NotebookLM에 아웃소싱</small></h2>
+    <div class="desc">
+      딥리서치로 컨텍스트를 태우지 말고,<br>
+      조사는 NotebookLM이 하고<br>
+      Claude는 결과만 받아옵니다.<br>
+      출처·팟캐스트·퀴즈까지 전부 명령어로.
+    </div>
+    <div class="meta">⭐ 17.5k · Python CLI + AI 에이전트 연동</div>
+    <a class="link" href="https://github.com/teng-lin/notebooklm-py" target="_blank" rel="noopener noreferrer">github.com/teng-lin/notebooklm-py</a>
+
+    <h3>📦 설치 (3단계)</h3>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">1. 설치 — 위 준비 단계에서 uv를 먼저 설치했다면 그대로 됩니다 (따옴표까지 그대로 복사하세요)</div>
+      <pre>uv tool install "notebooklm-py[browser]"</pre>
+    </div>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">2. 구글 로그인 — 입력하면 브라우저 창이 열립니다. 평소 NotebookLM 쓰는 구글 계정으로 로그인하세요</div>
+      <pre>notebooklm login</pre>
+    </div>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">3. 잘 연결됐는지 확인 — OK가 나오면 성공</div>
+      <pre>notebooklm auth check --test</pre>
+    </div>
+
+    <h3>▶️ 사용 흐름 (예시)</h3>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <pre>notebooklm create "내 리서치"                <span class="c"># 노트북 만들기</span>
+notebooklm source add "https://example.com"  <span class="c"># 자료 넣기</span>
+notebooklm ask "핵심 주제가 뭐야?"            <span class="c"># 질문하기</span>
+notebooklm generate audio --wait             <span class="c"># 팟캐스트 생성</span></pre>
+    </div>
+    <div class="note">⚠️ 구글 <b>비공식 API</b>를 사용합니다. 예고 없이 바뀔 수 있으니 개인 프로젝트 용도로 추천. Claude Code에 연결하면 Claude가 위 명령을 대신 실행해 줍니다.</div>
+  </div>
+
+  <!-- 3 -->
+  <div class="repo">
+    <div class="num">3</div>
+    <h2>graphify<small>코드·문서를 기억하는 지식 그래프</small></h2>
+    <div class="desc">
+      Claude는 세션마다 코드베이스를<br>
+      처음부터 다시 검색합니다.<br>
+      graphify는 코드, 문서, PDF, 영상까지<br>
+      쿼리 가능한 지식 그래프로 바꿔줍니다.
+    </div>
+    <div class="meta">⭐ 81.5k · 약 40개 언어 지원 · Claude Code 등 20+ 도구 호환</div>
+    <a class="link" href="https://github.com/Graphify-Labs/graphify" target="_blank" rel="noopener noreferrer">github.com/Graphify-Labs/graphify</a>
+
+    <h3>📦 설치 (2단계)</h3>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">1. 도구 설치 — 철자 주의! 패키지 이름은 y가 두 개인 <b>graphifyy</b> 입니다</div>
+      <pre>uv tool install graphifyy</pre>
+    </div>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">2. Claude Code에 스킬 등록 — 자동으로 연결해 줍니다</div>
+      <pre>graphify install</pre>
+    </div>
+
+    <h3>▶️ 사용법</h3>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <div class="s-text">분석하고 싶은 프로젝트 폴더에서 claude 실행 후, 채팅창에 입력 (마침표는 "지금 이 폴더"라는 뜻)</div>
+      <pre>/graphify .</pre>
+    </div>
+    <div class="note">💡 완료되면 파일 3개가 생깁니다 — <b>graph.html</b>(더블클릭하면 그래프 시각화) · GRAPH_REPORT.md(요약 보고서) · graph.json(쿼리용 데이터)</div>
+  </div>
+
+  <!-- 4 -->
+  <div class="repo">
+    <div class="num">4</div>
+    <h2>impeccable<small>'AI가 만든 티' 지우는 디자인 시스템</small></h2>
+    <div class="desc">
+      보라색 그라데이션, 카드 속 카드 —<br>
+      다 비슷한 AI 화면에서 탈출.<br>
+      디자인 명령 23종과 안티패턴 감지 46종으로<br>
+      Claude가 템플릿이 아니라 감각으로 디자인합니다.
+    </div>
+    <div class="meta">⭐ 45.2k · Claude Code / Cursor / Copilot 등 지원</div>
+    <a class="link" href="https://github.com/pbakaus/impeccable" target="_blank" rel="noopener noreferrer">github.com/pbakaus/impeccable</a>
+
+    <h3>📦 설치 (3단계)</h3>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">1. 먼저 내 프로젝트 폴더로 이동합니다 (cd = 폴더 이동 명령)</div>
+      <pre>cd 내프로젝트폴더경로   <span class="c"># 예: cd D:\my-website</span></pre>
+    </div>
+    <div class="step">
+      <span class="s-label term">터미널</span>
+      <div class="s-text">2. 설치 실행 — Node.js가 있어야 합니다 (준비 ① 참고). 중간에 질문이 나오면 엔터로 진행</div>
+      <pre>npx impeccable install</pre>
+    </div>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <div class="s-text">3. 같은 폴더에서 claude 실행 후 최초 세팅 한 번</div>
+      <pre>/impeccable init</pre>
+    </div>
+
+    <h3>▶️ 자주 쓰는 명령</h3>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <pre>/impeccable audit     <span class="c"># 지금 디자인 문제점 점검</span>
+/impeccable polish    <span class="c"># 디테일 다듬기</span>
+/impeccable critique  <span class="c"># 신랄한 디자인 비평 받기</span></pre>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="repo">
+    <div class="num">5</div>
+    <h2>ponytail<small>과잉 코드 54% 다이어트</small></h2>
+    <div class="desc">
+      부탁 안 한 기능, 안 쓰는 라이브러리 —<br>
+      Claude의 과잉 생산을 잡아줍니다.<br>
+      "만들 필요 있나? → 이미 있나? → 기본 기능으로 되나?"<br>
+      게으른 시니어 개발자처럼 생각하게 만드는 규칙.
+    </div>
+    <div class="meta">⭐ 79.5k · 생성 코드 약 54%↓ · 비용 약 20%↓ · MIT</div>
+    <a class="link" href="https://github.com/DietrichGebert/ponytail" target="_blank" rel="noopener noreferrer">github.com/DietrichGebert/ponytail</a>
+
+    <h3>📦 설치 (1단계로 끝)</h3>
+    <div class="step">
+      <span class="s-label cc">Claude Code</span>
+      <div class="s-text">채팅 입력창에 아래 두 줄을 한 줄씩 입력합니다</div>
+      <pre>/plugin marketplace add DietrichGebert/ponytail
+/plugin install ponytail@ponytail</pre>
+    </div>
+
+    <h3>▶️ 사용법</h3>
+    <div class="step">
+      <div class="s-text">
+        설치하면 끝 — 별도 명령이 없습니다.<br>
+        이후 코드를 시킬 때마다 Claude가 알아서<br>
+        "덜 만들고, 있는 걸 재사용하는" 방향으로 움직입니다.
+      </div>
+    </div>
+    <div class="note">💡 Cursor·Windsurf 같은 에디터를 쓴다면, 저장소 안의 룰 파일을 복사해 넣는 방식으로 적용합니다 (README에 도구별 안내 있음).</div>
+  </div>
+
+  <div class="foot">
+    별 개수는 2026년 7월 기준입니다.<br>
+    도움이 되셨다면 <b>@eggboy.ai</b> 팔로우 —<br>
+    매주 이런 정리를 올립니다. 🥚
+  </div>
+
+</div>
+</body>
+</html>
